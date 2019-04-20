@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "8.10"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-object-rest-spread",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-export-default-from"
+  ]
+}

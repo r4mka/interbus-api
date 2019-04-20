@@ -1,0 +1,13 @@
+list:
+  events:
+    - http:
+        path: /
+        method: GET
+        cors: true
+
+create:
+  events:
+    - http:
+        path: /
+        method: POST
+        cors: true

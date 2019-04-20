@@ -1,0 +1,62 @@
+{
+  "name": "interbus-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "bnr offline",
+    "dynamodb": "bnr dynamodb",
+    "dynamodb:admin": "bnr dynamodb-admin",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "betterScripts": {
+    "offline": {
+      "command": "sls offline start",
+      "env": {
+        "IS_OFFLINE": true
+      }
+    },
+    "dynamodb": "sls dynamodb start",
+    "dynamodb-admin": {
+      "command": "dynamodb-admin",
+      "env": {
+        "DYNAMO_ENDPOINT": "http://localhost:8000"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r4mka/interbus-api.git"
+  },
+  "author": "Adam Ramski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r4mka/interbus-api/issues"
+  },
+  "homepage": "https://github.com/r4mka/interbus-api#readme",
+  "dependencies": {
+    "dynamoose": "^1.7.2",
+    "http-errors": "^1.7.2",
+    "joi": "^14.3.1",
+    "lodash": "^4.17.11",
+    "middy": "^0.25.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "aws-sdk": "^2.441.0",
+    "babel-loader": "^8.0.5",
+    "better-npm-run": "^0.1.1",
+    "dynamodb-admin": "^3.1.3",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "serverless": "^1.41.0",
+    "serverless-dynamodb-local": "^0.2.37",
+    "serverless-offline": "^4.9.4",
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.30.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

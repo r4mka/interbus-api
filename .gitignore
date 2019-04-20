@@ -1,0 +1,8 @@
+node_modules
+.serverless
+.dynamodb
+.webpack
+.cache-loader
+.jest
+.idea
+.env
