@@ -29,10 +29,8 @@ const transformResponse = data => ({ statusCode: 200, body: JSON.stringify(data)
  * @param fn                lambda function
  * @returns {middy.IMiddy}
  */
-export default (fn) => {
-  const handler = middy((...args) =>
-    Promise.resolve(fn(...args)).then(transformResponse),
-  )
+export default fn => {
+  const handler = middy((...args) => Promise.resolve(fn(...args)).then(transformResponse))
     .use(cors())
     .use(httpEventNormalizer())
     .use(httpHeaderNormalizer())
