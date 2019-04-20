@@ -51,6 +51,11 @@ module.exports = {
         include: paths.src,
         exclude: /node_modules/,
       },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
     ],
   },
   optimization: {
@@ -59,9 +64,5 @@ module.exports = {
     removeEmptyChunks: !isLocal,
     mergeDuplicateChunks: !isLocal,
   },
-  plugins: [
-    new webpack.DefinePlugin({ 'global.GENTLY': false }),
-    new HardSourceWebpackPlugin(),
-  ],
+  plugins: [new webpack.DefinePlugin({ 'global.GENTLY': false }), new HardSourceWebpackPlugin()],
 };
-
