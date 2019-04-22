@@ -1,8 +1,4 @@
-import { wrapper, storage } from 'utils';
+import { wrapper } from 'utils';
+import { listDrivers } from 'functions/common';
 
-export default wrapper(() =>
-  storage
-    .query('sk')
-    .eq('driver')
-    .exec(),
-);
+export default wrapper(() => listDrivers());

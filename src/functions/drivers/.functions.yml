@@ -5,6 +5,13 @@ create:
         method: POST
         cors: true
 
+update:
+  events:
+    - http:
+        path: /{id}
+        method: POST
+        cors: true
+
 delete:
   events:
     - http:
