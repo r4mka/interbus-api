@@ -16,6 +16,7 @@ if (IS_OFFLINE && !USE_REMOTE_DB) {
 
 dynamoose.setDefaults({
   create: true,
+  update: true,
   prefix: `${ENVIRONMENT}_`,
 });
 

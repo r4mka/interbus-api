@@ -1,0 +1,26 @@
+create:
+  events:
+    - http:
+        path: /
+        method: POST
+        cors: true
+
+delete:
+  events:
+    - http:
+        path: /{id}
+        method: DELETE
+        cors: true
+list:
+  events:
+    - http:
+        path: /
+        method: GET
+        cors: true
+
+get:
+  events:
+    - http:
+        path: /{id}
+        method: GET
+        cors: true

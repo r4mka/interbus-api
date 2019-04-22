@@ -1,12 +1,8 @@
+const path = require('path');
 const functions = require('./serverless.functions');
 
 const service = 'interbus-api';
-const {
-  ENVIRONMENT = 'development',
-  AWS_ACCOUNT_ID,
-  OFFLINE_PORT,
-  // OFFLINE_API_KEY,
-} = process.env;
+const { ENVIRONMENT = 'development', AWS_ACCOUNT_ID, OFFLINE_PORT } = process.env;
 
 module.exports = {
   service,
@@ -21,16 +17,11 @@ module.exports = {
     apiName: service,
     stackName: service,
   },
-  plugins: [
-    'serverless-webpack',
-    'serverless-offline',
-    'serverless-dynamodb-local',
-  ],
+  plugins: ['serverless-webpack', 'serverless-offline', 'serverless-dynamodb-local'],
   custom: {
     'serverless-offline': {
       host: '0.0.0.0',
       port: OFFLINE_PORT,
-      // apiKey: OFFLINE_API_KEY,
     },
     webpack: {
       includeModules: true,
@@ -38,7 +29,7 @@ module.exports = {
     dynamodb: {
       start: {
         port: 8000,
-        inMemory: true,
+        dbPath: path.resolve(__dirname, '.dynamodb'),
       },
     },
   },
