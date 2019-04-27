@@ -1,5 +1,4 @@
-import { wrapper, storage, generateId } from 'utils';
+import { wrapper } from 'utils';
+import { createDriver } from 'functions/drivers';
 
-export default wrapper(({ body: { name, status, car } }) =>
-  storage.create({ pk: generateId('driver'), sk: 'driver', name, status, car }),
-);
+export default wrapper(({ body }) => createDriver(body));

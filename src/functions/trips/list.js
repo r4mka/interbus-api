@@ -1,4 +1,4 @@
 import { wrapper } from 'utils';
-import { listTrips } from 'functions/common';
+import { listTrips } from 'functions/trips';
 
 export default wrapper(() => listTrips());

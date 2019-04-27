@@ -1,3 +1,4 @@
-import { wrapper, storage } from 'utils';
+import { wrapper } from 'utils';
+import { deleteCar } from 'functions/cars';
 
-export default wrapper(({ pathParameters: { id } }) => storage.delete({ pk: id, sk: 'car' }));
+export default wrapper(({ pathParameters: { id } }) => deleteCar(id));

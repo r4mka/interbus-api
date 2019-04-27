@@ -1,3 +1,4 @@
-import { wrapper, storage } from 'utils';
+import { wrapper } from 'utils';
+import { deleteTrip } from 'functions/trips';
 
-export default wrapper(({ pathParameters: { id } }) => storage.delete({ pk: id, sk: 'trip' }));
+export default wrapper(({ pathParameters: { id } }) => deleteTrip(id));

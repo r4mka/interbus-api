@@ -1,3 +1,4 @@
-import { wrapper, storage } from 'utils';
+import { wrapper } from 'utils';
+import { deleteDriver } from 'functions/drivers';
 
-export default wrapper(({ pathParameters: { id } }) => storage.delete({ pk: id, sk: 'driver' }));
+export default wrapper(({ pathParameters: { id } }) => deleteDriver(id));
