@@ -7,11 +7,8 @@ const {
 
 const StorageSchema = new dynamoose.Schema(
   {
-    pk: {
-      type: String,
-      hashKey: true,
-    },
-    sk: {
+    pk: { type: String, hashKey: true },
+    sortKey: {
       type: String,
       rangeKey: true,
       index: [
@@ -29,32 +26,23 @@ const StorageSchema = new dynamoose.Schema(
         },
       ],
     },
-    date: {
-      type: String,
-    },
-    status: {
-      type: String,
-      enum: statuses,
-    },
-    car: {
-      type: String,
-    },
-    name: {
-      type: String,
-    },
-    driver: {
-      type: String,
-    },
-    seats: {
-      type: Number,
-    },
-    takenSeats: {
-      type: Number,
-    },
-    direction: {
-      type: String,
-      enum: directions,
-    },
+
+    // driver
+    car: { type: String },
+    name: { type: String },
+    status: { type: String, enum: statuses },
+
+    // car
+    model: { type: String },
+    year: { type: Number },
+    milage: { type: Number },
+    driver: { type: String },
+    seats: { type: Number },
+
+    // trip
+    takenSeats: { type: Number },
+    direction: { type: String, enum: directions },
+    date: { type: String },
   },
   { timestamps: true },
 );
