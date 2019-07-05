@@ -47,7 +47,7 @@ const StorageSchema = new dynamoose.Schema(
     plate: { type: String },
     milage: { type: Number },
 
-    // departure
+    // departure, client
     orders: { type: Number },
   },
   { timestamps: true },
