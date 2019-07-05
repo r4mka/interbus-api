@@ -31,3 +31,10 @@ getClient:
         path: /{id}
         method: GET
         cors: true
+
+getClientOrders:
+  events:
+    - http:
+        path: /{id}/orders
+        method: GET
+        cors: true
