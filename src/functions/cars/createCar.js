@@ -17,7 +17,7 @@ export default wrapper(({ body: { status, carModel, milage, plate, year, driverI
     year,
   }).then(car =>
     driverId
-      ? assignDriverToCar(driverId, car.pk)
+      ? assignDriverToCar({ driverId, carId: car.pk })
           .then(({ driver }) => ({ ...car, driver }))
           .catch(() => car)
       : car,

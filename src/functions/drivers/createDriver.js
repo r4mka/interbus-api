@@ -18,7 +18,7 @@ export default wrapper(
       primaryPhoneNL,
     }).then(driver =>
       carId
-        ? assignDriverToCar(driver.pk, carId)
+        ? assignDriverToCar({ carId, driverId: driver.pk })
             .then(({ car }) => ({ ...driver, car }))
             .catch(() => driver)
         : driver,

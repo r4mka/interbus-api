@@ -12,7 +12,7 @@ export default wrapper(({ pathParameters: { id }, body: { driverId, ...payload }
     .then(() =>
       Promise.all([
         Storage.update({ pk: id, sk: CAR }, payload),
-        driverId ? assignDriverToCar(driverId, id) : Promise.resolve(),
-      ]).then(([car]) => car),
+        driverId ? assignDriverToCar({ driverId, carId: id }).catch(() => {}) : Promise.resolve(),
+      ]).then(([car, { driver } = {}]) => (driver ? { ...car, driver } : car)),
     ),
 );

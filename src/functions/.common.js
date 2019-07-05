@@ -5,7 +5,7 @@ const {
   sortKeyValues: { CAR, DRIVER, ASSIGNED_CAR, ASSIGNED_DRIVER },
 } = config;
 
-export const assignDriverToCar = (driverId, carId) =>
+export const assignDriverToCar = ({ driverId, carId }) =>
   Promise.all([
     Storage.get({ pk: driverId, sk: DRIVER }).then(driver =>
       verify.presence(driver, 'Driver not found'),
