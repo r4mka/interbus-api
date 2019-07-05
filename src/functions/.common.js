@@ -53,5 +53,6 @@ export const assignDriverToCar = (driverId, carId) =>
             carModel: car.carModel,
           },
         ]),
-      ),
+      )
+      .then(() => ({ driver, car })),
   );

@@ -1,31 +1,31 @@
-create:
+createDriver:
   events:
     - http:
         path: /
         method: POST
         cors: true
 
-update:
+updateDriver:
   events:
     - http:
         path: /{id}
         method: POST
         cors: true
 
-delete:
+deleteDriver:
   events:
     - http:
         path: /{id}
         method: DELETE
         cors: true
-list:
+listDrivers:
   events:
     - http:
         path: /
         method: GET
         cors: true
 
-get:
+getDriver:
   events:
     - http:
         path: /{id}
