@@ -1,0 +1,33 @@
+createOrder:
+  events:
+    - http:
+        path: /
+        method: POST
+        cors: true
+
+updateOrder:
+  events:
+    - http:
+        path: /{id}
+        method: POST
+        cors: true
+
+deleteOrder:
+  events:
+    - http:
+        path: /{id}
+        method: DELETE
+        cors: true
+listOrders:
+  events:
+    - http:
+        path: /
+        method: GET
+        cors: true
+
+getOrder:
+  events:
+    - http:
+        path: /{id}
+        method: GET
+        cors: true
