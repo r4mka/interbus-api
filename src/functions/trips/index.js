@@ -1,10 +1,10 @@
 import { omitBy, isEmpty } from 'lodash';
-import { storage, verify, generateId } from 'utils';
+import { Storage, verify, generateId } from 'utils';
 
 const tripAttributes = ['pk', 'date', 'seats', 'takenSeats', 'driver', 'car', 'direction'];
 
 export function createTrip({ date, driver, car, direction }) {
-  return storage.create({
+  return Storage.createCar({
     pk: generateId('trip'),
     sk: 'trip',
     seats: 8, // todo: get seats count from car details
@@ -17,12 +17,11 @@ export function createTrip({ date, driver, car, direction }) {
 }
 
 export function deleteTrip(id) {
-  return storage.delete({ pk: id, sk: 'trip' });
+  return Storage.delete({ pk: id, sk: 'trip' });
 }
 
 export const getTrip = id =>
-  storage
-    .queryOne('pk')
+  Storage.queryOne('pk')
     .eq(id)
     .where('sk')
     .eq('trip')
@@ -30,8 +29,7 @@ export const getTrip = id =>
     .exec();
 
 export const listTrips = () =>
-  storage
-    .query('sk')
+  Storage.query('sk')
     .eq('trip')
     .attributes(tripAttributes)
     .exec();
@@ -40,7 +38,7 @@ export const updateTrip = (id, { takenSeats, date, driver, car, direction }) =>
   getTrip(id)
     .then(verify.presence)
     .then(() =>
-      storage.update(
+      Storage.update(
         { pk: id, sk: 'trip' },
         omitBy({ takenSeats, date, driver, car, direction }, isEmpty),
         { returnValues: 'NONE' },
