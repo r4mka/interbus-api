@@ -1,0 +1,33 @@
+createClient:
+  events:
+    - http:
+        path: /
+        method: POST
+        cors: true
+
+updateClient:
+  events:
+    - http:
+        path: /{id}
+        method: POST
+        cors: true
+
+deleteClient:
+  events:
+    - http:
+        path: /{id}
+        method: DELETE
+        cors: true
+listClients:
+  events:
+    - http:
+        path: /
+        method: GET
+        cors: true
+
+getClient:
+  events:
+    - http:
+        path: /{id}
+        method: GET
+        cors: true
