@@ -45,6 +45,8 @@ export default fn => {
     const statusCode = status || (code === 'ValidationError' && 400) || 500;
     const body = { statusCode, code, message };
 
+    console.error(h.error);
+
     h.response = Object.assign(h.response || {}, {
       statusCode,
       body: JSON.stringify(body),

@@ -9,7 +9,8 @@ import { isEmpty } from 'lodash';
 // } = config;
 
 export { errors };
-export const generateId = type => `${type}_${shortid.generate()}`;
+export const generateId = type => `${type}-${shortid.generate()}`;
+export const id = generateId;
 
 /**
  * Creates a verifier that throws given error if condition is met.
@@ -26,9 +27,9 @@ export const generateId = type => `${type}_${shortid.generate()}`;
  * @param condition
  * @returns {function(*=): *}
  */
-export const verifier = ({ error, message, condition }) => item => {
+export const verifier = ({ error, message, condition }) => (item, customMessage) => {
   if (condition(item)) {
-    throw error(message);
+    throw error(customMessage || message);
   }
   return item;
 };

@@ -1,48 +1,54 @@
 import dynamoose from 'dynamoose';
-import config from 'config';
+// import config from 'config';
 
-const {
-  app: { statuses, directions },
-} = config;
+// const {
+//   app: { statuses, directions },
+// } = config;
 
 const StorageSchema = new dynamoose.Schema(
   {
+    // keys
     pk: { type: String, hashKey: true },
-    sortKey: {
+    sk: {
       type: String,
       rangeKey: true,
       index: [
         {
+          name: 'MainIndex',
           global: true,
-          project: true,
-          throughput: 2,
-        },
-        {
-          name: 'dateGlobalIndex',
-          global: true,
-          rangeKey: 'date',
+          rangeKey: 'gsiSk',
           project: true,
           throughput: 2,
         },
       ],
     },
+    // mostly date and status for driver and cars
+    gsiSk: { type: String }, // String or Date?
 
-    // driver
-    car: { type: String },
-    name: { type: String },
-    status: { type: String, enum: statuses },
+    // common
+    firstname: { type: String },
+    lastname: { type: String },
+    primaryPhonePL: { type: String },
+    secondaryPhonePL: { type: String },
+    primaryPhoneNL: { type: String },
+    secondaryPhoneNL: { type: String },
+    status: { type: String },
+
+    // order
+    from: { type: String },
+    to: { type: String },
+    direction: { type: String },
+    clientId: { type: String },
 
     // car
-    model: { type: String },
     year: { type: Number },
-    milage: { type: Number },
-    driver: { type: String },
+    carModel: { type: String },
     seats: { type: Number },
+    plate: { type: String },
+    milage: { type: Number },
 
-    // trip
-    takenSeats: { type: Number },
-    direction: { type: String, enum: directions },
-    date: { type: String },
+    // departure
+    orders: { type: Number },
   },
   { timestamps: true },
 );

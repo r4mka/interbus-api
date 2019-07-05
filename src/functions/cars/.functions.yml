@@ -1,31 +1,31 @@
-create:
+createCar:
   events:
     - http:
         path: /
         method: POST
         cors: true
 
-update:
+updateCar:
   events:
     - http:
         path: /{id}
         method: POST
         cors: true
 
-delete:
+deleteCar:
   events:
     - http:
         path: /{id}
         method: DELETE
         cors: true
-list:
+listCars:
   events:
     - http:
         path: /
         method: GET
         cors: true
 
-get:
+getCar:
   events:
     - http:
         path: /{id}

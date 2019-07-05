@@ -4,4 +4,10 @@ export default {
     directions: ['gdn - szn', 'szn - nl', 'nl - szn', 'szn - gdn'],
     dateFormat: 'DD-MM-YYYY',
   },
+  sortKeyValues: {
+    CAR: 'CAR',
+    DRIVER: 'DRIVER',
+    ASSIGNED_CAR: 'ASSIGNED-CAR',
+    ASSIGNED_DRIVER: 'ASSIGNED-DRIVER',
+  },
 };
