@@ -41,6 +41,7 @@ export default wrapper(
     },
   }) =>
     Storage.get({ pk: clientId, sk: CLIENT })
+      // todo: making orders without providing clientId should be possible as well
       .then(client => verify.presence(client, 'Client not found'))
       .then(() =>
         Storage.create({
