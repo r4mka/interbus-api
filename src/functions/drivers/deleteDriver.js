@@ -16,5 +16,5 @@ export default wrapper(({ pathParameters: { id } }) =>
       .where('gsiSk')
       .eq(id)
       .exec(),
-  ]).then(results => Storage.batchDelete(flatten(results).map(({ pk, sk }) => ({ pk, sk })))),
+  ]).then(results => Storage.batchDelete(flatten(results))),
 );
