@@ -23,22 +23,25 @@ export default wrapper(
   }) =>
     Storage.get({ pk: clientId, sk: CLIENT })
       .then(client => verify.presence(client, 'Client not found'))
-      .then(() =>
-        Storage.create({
-          pk: id('order'),
-          sk: ORDER,
-          gsiSk: date,
-          firstname,
-          lastname,
-          primaryPhonePL,
-          secondaryPhonePL,
-          primaryPhoneNL,
-          secondaryPhoneNL,
-          from,
-          to,
-          clientId,
-        }).then(order =>
-          Storage.create({ pk: clientId, sk: order.pk, gsiSk: date, from, to }).then(() => order),
-        ),
+      .then(
+        () =>
+          Storage.create({
+            pk: id('order'),
+            sk: ORDER,
+            date,
+            firstname,
+            lastname,
+            primaryPhonePL,
+            secondaryPhonePL,
+            primaryPhoneNL,
+            secondaryPhoneNL,
+            from,
+            to,
+            clientId,
+          }).then(order =>
+            // add order to client
+            Storage.create({ pk: clientId, sk: order.pk, date, from, to }).then(() => order),
+          ),
+        // todo: after order creation, create departure item in the table and update orders count there
       ),
 );

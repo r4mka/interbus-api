@@ -16,14 +16,16 @@ const StorageSchema = new dynamoose.Schema(
         {
           name: 'MainIndex',
           global: true,
-          rangeKey: 'gsiSk',
+          rangeKey: 'date',
           project: true,
           throughput: 2,
         },
       ],
     },
-    // mostly date and status for driver and cars
-    gsiSk: { type: String }, // String or Date?
+    // MainIndex sort key
+    date: { type: Date },
+
+    // todo: prepare separate GSI for car <-> driver relation
 
     // common
     firstname: { type: String },
