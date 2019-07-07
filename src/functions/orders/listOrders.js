@@ -11,11 +11,11 @@ export default wrapper(({ queryStringParameters: { from, to } }) => {
     .eq(ORDER);
 
   if (from && to) {
-    queryOrders = queryOrders.where('date').between(from, to);
+    queryOrders = queryOrders.where('date').between(+from, +to);
   } else if (from) {
-    queryOrders = queryOrders.where('date').ge(from);
+    queryOrders = queryOrders.where('date').ge(+from);
   } else if (to) {
-    queryOrders = queryOrders.where('date').le(to);
+    queryOrders = queryOrders.where('date').le(+to);
   }
 
   return queryOrders.exec();
