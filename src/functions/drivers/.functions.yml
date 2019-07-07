@@ -18,6 +18,7 @@ deleteDriver:
         path: /{id}
         method: DELETE
         cors: true
+
 listDrivers:
   events:
     - http:

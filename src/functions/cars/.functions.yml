@@ -18,6 +18,7 @@ deleteCar:
         path: /{id}
         method: DELETE
         cors: true
+
 listCars:
   events:
     - http:

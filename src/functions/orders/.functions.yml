@@ -18,6 +18,7 @@ deleteOrder:
         path: /{id}
         method: DELETE
         cors: true
+
 listOrders:
   events:
     - http:

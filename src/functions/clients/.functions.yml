@@ -18,6 +18,7 @@ deleteClient:
         path: /{id}
         method: DELETE
         cors: true
+
 listClients:
   events:
     - http:
