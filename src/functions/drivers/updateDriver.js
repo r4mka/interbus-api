@@ -1,19 +1,25 @@
 import config from 'config';
 import { Storage, wrapper, verify } from 'utils';
 import { assignDriverToCar } from 'functions/.common';
+import { pick } from 'lodash';
 
 const {
   sortKeyValues: { DRIVER },
 } = config;
 
 // todo: figure out generic mechanism for validation
-export default wrapper(({ pathParameters: { id }, body: { carId, ...payload } }) =>
+export default wrapper(({ pathParameters: { id }, body = {} }) =>
   Storage.get({ pk: id, sk: DRIVER })
     .then(driver => verify.presence(driver, 'Driver not found'))
     .then(() =>
       Promise.all([
-        Storage.update({ pk: id, sk: DRIVER }, payload),
-        carId ? assignDriverToCar({ carId, driverId: id }).catch(() => {}) : Promise.resolve(),
+        Storage.update(
+          { pk: id, sk: DRIVER },
+          pick(body, 'status', 'firstname', 'lastname', 'primaryPhonePL', 'primaryPhoneNL'),
+        ),
+        body.carId
+          ? assignDriverToCar({ carId: body.carId, driverId: id }).catch(() => {})
+          : Promise.resolve(),
       ]).then(([driver, { car } = {}]) => (car ? { ...car, driver } : driver)),
     ),
 );

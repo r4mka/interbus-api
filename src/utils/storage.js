@@ -1,9 +1,9 @@
 import dynamoose from 'dynamoose';
-// import config from 'config';
+import config from 'config';
 
-// const {
-//   app: { statuses, directions },
-// } = config;
+const {
+  app: { status },
+} = config;
 
 const StorageSchema = new dynamoose.Schema(
   {
@@ -31,7 +31,7 @@ const StorageSchema = new dynamoose.Schema(
     },
     // GSI sort keys
     date: { type: Date },
-    status: { type: String },
+    status: { type: String, enum: status },
 
     // common
     firstname: { type: String },

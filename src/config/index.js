@@ -1,6 +1,6 @@
 export default {
   app: {
-    statuses: ['active', 'not_active', 'vacation', 'repair'],
+    status: ['active', 'inactive', 'vacation', 'service', 'blocked'],
     directions: ['gdn - szn', 'szn - nl', 'nl - szn', 'szn - gdn'],
     dateFormat: 'DD-MM-YYYY',
   },

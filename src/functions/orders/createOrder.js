@@ -7,7 +7,7 @@ const {
   sortKeyValues: { CLIENT, ORDER },
 } = config;
 
-export default wrapper(({ body }) =>
+export default wrapper(({ body = {} }) =>
   Storage.get({ pk: body.clientId, sk: CLIENT })
     // todo: making orders without providing clientId should be possible as well
     .then(client => verify.presence(client, 'Client not found'))

@@ -6,6 +6,7 @@ const {
   sortKeyValues: { ASSIGNED_DRIVER },
 } = config;
 
+// todo: add 404 NotFound error to all delete handlers
 export default wrapper(({ pathParameters: { id } }) =>
   Promise.all([
     Storage.query('pk')
