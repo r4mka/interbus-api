@@ -71,19 +71,19 @@ const loadFunctions = name => {
 
   return fs.existsSync(file)
     ? mapKeys(
-      mapValues(yaml.safeLoad(fs.readFileSync(file, 'utf8')), ({ events = [], ...fn }, key) => ({
-        ...fn,
-        name: ['interbus-api', name, key].join('-'),
-        handler: path.join('src', 'functions', name, `${key}.default`),
-        events: compose(fixes.offline)(events).map(
-          compose(
-            fixes.authorizer,
-            fixes.path(name.toLowerCase()),
+        mapValues(yaml.safeLoad(fs.readFileSync(file, 'utf8')), ({ events = [], ...fn }, key) => ({
+          ...fn,
+          name: ['interbus-api', name, key].join('-'),
+          handler: path.join('src', 'functions', name, `${key}.default`),
+          events: compose(fixes.offline)(events).map(
+            compose(
+              fixes.authorizer,
+              fixes.path(name.toLowerCase()),
+            ),
           ),
-        ),
-      })),
-      fn => fn.name,
-    )
+        })),
+        fn => fn.name,
+      )
     : {};
 };
 
