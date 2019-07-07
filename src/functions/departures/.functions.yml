@@ -1,0 +1,13 @@
+listDepartures:
+  events:
+    - http:
+        path: /
+        method: GET
+        cors: true
+
+getDeparture:
+  events:
+    - http:
+        path: /{id}
+        method: GET
+        cors: true
