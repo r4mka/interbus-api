@@ -1,29 +1,11 @@
 import config from 'config';
-import { isEmpty, pick } from 'lodash';
+import { pick } from 'lodash';
 import { wrapper, Storage, id, verify } from 'utils';
+import { incrementDepartureOrders } from 'functions/.common';
 
 const {
-  sortKeyValues: { CLIENT, DEPARTURE, ORDER },
+  sortKeyValues: { CLIENT, ORDER },
 } = config;
-
-const syncClient = ({ clientId, orderId, ...data }) =>
-  Storage.create({ pk: clientId, sk: orderId, ...data });
-
-const syncDeparture = orderDate =>
-  // find departure for given date
-  Storage.query('sk')
-    .using('DateGlobalIndex')
-    .eq(DEPARTURE)
-    .where('date')
-    .eq(orderDate)
-    .exec()
-    .then(order =>
-      isEmpty(order)
-        ? // if departure doesn't exist, create one and set orders count to one
-          Storage.create({ pk: id('departure'), sk: DEPARTURE, orders: 1 })
-        : // if departure exists, increment orders count by one
-          Storage.update({ pk: order.pk, sk: DEPARTURE }, { $ADD: { orders: 1 } }),
-    );
 
 export default wrapper(({ body }) =>
   Storage.get({ pk: body.clientId, sk: CLIENT })
@@ -48,8 +30,13 @@ export default wrapper(({ body }) =>
         // direction, todo: figure out how to compute direction on the fly based on from and to
       }).then(order =>
         Promise.all([
-          syncClient({ orderId: order.pk, ...pick(body, ['clientId', 'date', 'from', 'to']) }),
-          syncDeparture(body.date),
+          // add order to client
+          Storage.create({
+            pk: body.clientId,
+            sk: order.pk,
+            ...pick(body, ['date', 'from', 'to']),
+          }),
+          incrementDepartureOrders(body.date),
         ]).then(() => order),
       ),
     ),
