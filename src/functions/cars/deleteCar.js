@@ -12,8 +12,9 @@ export default wrapper(({ pathParameters: { id } }) =>
       .eq(id)
       .exec(),
     Storage.query('sk')
+      .using('StatusGlobalIndex')
       .eq(ASSIGNED_CAR)
-      .where('gsiSk')
+      .where('status')
       .eq(id)
       .exec(),
   ]).then(results => Storage.batchDelete(flatten(results))),

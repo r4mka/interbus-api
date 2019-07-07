@@ -10,7 +10,7 @@ export default wrapper(({ body: { status, carModel, milage, plate, year, driverI
   Storage.create({
     pk: id('car'),
     sk: CAR,
-    gsiSk: status,
+    status,
     carModel,
     milage,
     plate,

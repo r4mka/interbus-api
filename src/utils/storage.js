@@ -14,7 +14,14 @@ const StorageSchema = new dynamoose.Schema(
       rangeKey: true,
       index: [
         {
-          name: 'MainIndex',
+          name: 'StatusGlobalIndex',
+          global: true,
+          rangeKey: 'status',
+          project: true,
+          throughput: 2,
+        },
+        {
+          name: 'DateGlobalIndex',
           global: true,
           rangeKey: 'date',
           project: true,
@@ -22,10 +29,9 @@ const StorageSchema = new dynamoose.Schema(
         },
       ],
     },
-    // MainIndex sort key
+    // GSI sort keys
     date: { type: Date },
-
-    // todo: prepare separate GSI for car <-> driver relation
+    status: { type: String },
 
     // common
     firstname: { type: String },
@@ -34,7 +40,6 @@ const StorageSchema = new dynamoose.Schema(
     secondaryPhonePL: { type: String },
     primaryPhoneNL: { type: String },
     secondaryPhoneNL: { type: String },
-    status: { type: String },
 
     // order
     from: { type: String },

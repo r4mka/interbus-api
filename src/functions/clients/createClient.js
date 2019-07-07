@@ -10,8 +10,8 @@ export default wrapper(
     Storage.create({
       pk: id('client'),
       sk: CLIENT,
-      gsiSk: status,
       orders: 0,
+      status,
       firstname,
       lastname,
       primaryPhonePL,

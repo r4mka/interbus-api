@@ -7,6 +7,7 @@ const {
 
 export default wrapper(() =>
   Storage.query('sk')
+    .using('StatusGlobalIndex')
     .eq(CAR)
     .exec(),
 );

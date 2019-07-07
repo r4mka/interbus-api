@@ -11,7 +11,7 @@ export default wrapper(
     Storage.create({
       pk: id('driver'),
       sk: DRIVER,
-      gsiSk: status,
+      status,
       firstname,
       lastname,
       primaryPhonePL,

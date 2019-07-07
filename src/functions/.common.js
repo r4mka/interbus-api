@@ -15,14 +15,16 @@ export const assignDriverToCar = ({ driverId, carId }) =>
     Promise.all([
       // find all drivers assigned to a given car
       Storage.query('sk')
+        .using('StatusGlobalIndex')
         .eq(ASSIGNED_DRIVER)
-        .where('gsiSk')
+        .where('status')
         .eq(driverId)
         .exec(),
       // find all cars assigned to a given driver
       Storage.query('sk')
+        .using('StatusGlobalIndex')
         .eq(ASSIGNED_CAR)
-        .where('gsiSk')
+        .where('status')
         .eq(carId)
         .exec(),
     ])
@@ -39,16 +41,14 @@ export const assignDriverToCar = ({ driverId, carId }) =>
           {
             pk: carId,
             sk: ASSIGNED_DRIVER,
-            gsiSk: driver.pk,
-            status: driver.gsiSk,
+            status: driver.pk,
             firstname: driver.firstname,
             lastname: driver.lastname,
           },
           {
             pk: driverId,
             sk: ASSIGNED_CAR,
-            gsiSk: car.pk,
-            status: car.gsiSk,
+            status: car.pk,
             plate: car.plate,
             carModel: car.carModel,
           },

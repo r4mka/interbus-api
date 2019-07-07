@@ -1,17 +1,18 @@
 import config from 'config';
-import { isEmpty } from 'lodash';
+import { isEmpty, pick } from 'lodash';
 import { wrapper, Storage, id, verify } from 'utils';
 
 const {
   sortKeyValues: { CLIENT, DEPARTURE, ORDER },
 } = config;
 
-const syncClient = (clientId, orderId, data) =>
+const syncClient = ({ clientId, orderId, ...data }) =>
   Storage.create({ pk: clientId, sk: orderId, ...data });
 
 const syncDeparture = orderDate =>
   // find departure for given date
   Storage.query('sk')
+    .using('DateGlobalIndex')
     .eq(DEPARTURE)
     .where('date')
     .eq(orderDate)
@@ -24,44 +25,32 @@ const syncDeparture = orderDate =>
           Storage.update({ pk: order.pk, sk: DEPARTURE }, { $ADD: { orders: 1 } }),
     );
 
-export default wrapper(
-  ({
-    body: {
-      date,
-      firstname,
-      lastname,
-      primaryPhonePL,
-      secondaryPhonePL,
-      primaryPhoneNL,
-      secondaryPhoneNL,
-      from,
-      to,
-      clientId,
-      // direction, todo: figure out how to compute direction on the fly based on from and to
-    },
-  }) =>
-    Storage.get({ pk: clientId, sk: CLIENT })
-      // todo: making orders without providing clientId should be possible as well
-      .then(client => verify.presence(client, 'Client not found'))
-      .then(() =>
-        Storage.create({
-          pk: id('order'),
-          sk: ORDER,
-          date,
-          firstname,
-          lastname,
-          primaryPhonePL,
-          secondaryPhonePL,
-          primaryPhoneNL,
-          secondaryPhoneNL,
-          from,
-          to,
-          clientId,
-        }).then(order =>
-          Promise.all([
-            syncClient(clientId, order.pk, { date, from, to }),
-            syncDeparture(date),
-          ]).then(() => order),
-        ),
+export default wrapper(({ body }) =>
+  Storage.get({ pk: body.clientId, sk: CLIENT })
+    // todo: making orders without providing clientId should be possible as well
+    .then(client => verify.presence(client, 'Client not found'))
+    .then(() =>
+      Storage.create({
+        pk: id('order'),
+        sk: ORDER,
+        ...pick(body, [
+          'date',
+          'firstname',
+          'lastname',
+          'primaryPhonePL',
+          'secondaryPhonePL',
+          'primaryPhoneNL',
+          'secondaryPhoneNL',
+          'from',
+          'to',
+          'clientId',
+        ]),
+        // direction, todo: figure out how to compute direction on the fly based on from and to
+      }).then(order =>
+        Promise.all([
+          syncClient({ orderId: order.pk, ...pick(body, ['clientId', 'date', 'from', 'to']) }),
+          syncDeparture(body.date),
+        ]).then(() => order),
       ),
+    ),
 );

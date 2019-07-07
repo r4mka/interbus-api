@@ -9,6 +9,7 @@ const {
 const syncDeparture = orderDate =>
   // find departure for given date
   Storage.queryOne('sk')
+    .using('DateGlobalIndex')
     .eq(DEPARTURE)
     .where('date')
     .eq(orderDate)
@@ -26,7 +27,9 @@ export default wrapper(({ pathParameters: { id: orderId } }) =>
     Storage.queryOne('pk')
       .eq(orderId)
       .exec(),
-    Storage.query('sk').eq(orderId),
+    Storage.query('sk')
+      .using('DateGlobalIndex')
+      .eq(orderId),
   ]),
 ).then(([order, clientOrders]) =>
   Promise.all([Storage.batchDelete([order, ...clientOrders]), syncDeparture(order.date)]),
