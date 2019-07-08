@@ -32,3 +32,10 @@ getDriver:
         path: /{id}
         method: GET
         cors: true
+
+getDriverDepartures:
+  events:
+    - http:
+        path: /{id}/departures
+        method: GET
+        cors: true
