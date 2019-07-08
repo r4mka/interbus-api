@@ -12,7 +12,7 @@ const {
 
 export default wrapper(({ body = {} }) =>
   Storage.create({
-    pk: id('car'),
+    pk: id(CAR),
     sk: CAR,
     status: body.status || ACTIVE,
     ...pick(body, 'carModel', 'milage', 'plate', 'year'),

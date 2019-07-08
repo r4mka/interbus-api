@@ -13,7 +13,7 @@ export default wrapper(({ body = {} }) =>
     .then(client => verify.presence(client, 'Client not found'))
     .then(() =>
       Storage.create({
-        pk: id('order'),
+        pk: id(ORDER),
         sk: ORDER,
         ...pick(body, [
           'date',

@@ -11,7 +11,7 @@ const {
 
 export default wrapper(({ body = {} }) =>
   Storage.create({
-    pk: id('client'),
+    pk: id(CLIENT),
     sk: CLIENT,
     status: body.status || ACTIVE,
     ...pick(body, 'firstname', 'lastname', 'primaryPhonePL', 'primaryPhoneNL'),

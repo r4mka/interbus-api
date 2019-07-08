@@ -18,7 +18,7 @@ export const incrementDepartureOrders = date =>
   findDepartureByDate(date).then(departure =>
     isEmpty(departure)
       ? // if departure doesn't exist, create one and set orders count to one
-        Storage.create({ pk: id('departure'), sk: DEPARTURE, date, orders: 1 })
+        Storage.create({ pk: id(DEPARTURE), sk: DEPARTURE, date, orders: 1 })
       : // if departure exists, increment orders count by one
         Storage.update({ pk: departure.pk, sk: DEPARTURE }, { $ADD: { orders: 1 } }),
   );

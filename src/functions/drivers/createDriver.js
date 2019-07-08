@@ -12,7 +12,7 @@ const {
 
 export default wrapper(({ body = {} }) =>
   Storage.create({
-    pk: id('driver'),
+    pk: id(DRIVER),
     sk: DRIVER,
     status: body.status || ACTIVE,
     ...pick(body, 'firstname', 'lastname', 'primaryPhonePL', 'primaryPhoneNL'),
