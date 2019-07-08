@@ -1,0 +1,13 @@
+createList:
+  events:
+    - http:
+        path: /
+        method: POST
+        cors: true
+
+deleteList:
+  events:
+    - http:
+        path: /{id}
+        method: DELETE
+        cors: true

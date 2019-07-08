@@ -6,6 +6,7 @@ export default {
   },
   sortKeyValues: {
     CAR: 'CAR',
+    LIST: 'LIST',
     ORDER: 'ORDER',
     CLIENT: 'CLIENT',
     DRIVER: 'DRIVER',
