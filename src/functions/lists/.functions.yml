@@ -11,3 +11,10 @@ deleteList:
         path: /{id}
         method: DELETE
         cors: true
+
+getLists:
+  events:
+    - http:
+        path: /{id}
+        method: GET
+        cors: true
