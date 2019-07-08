@@ -3,14 +3,15 @@ import { wrapper, Storage } from 'utils';
 import { rangeQuery } from 'functions/.common';
 
 const {
-  sortKeyValues: { DEPARTURE },
+  sortKeyValues: { LIST },
 } = config;
 
-export default wrapper(({ queryStringParameters }) =>
+export default wrapper(({ pathParameters: { id: carId }, queryStringParameters }) =>
+  // todo: add limit controlled by queryStringParam
   rangeQuery(
     Storage.query('sk')
       .using('DateGlobalIndex')
-      .eq(DEPARTURE),
+      .eq(`${LIST}-${carId}`),
     queryStringParameters,
   ).exec(),
 );

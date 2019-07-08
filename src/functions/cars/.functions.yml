@@ -32,3 +32,10 @@ getCar:
         path: /{id}
         method: GET
         cors: true
+
+getCarDepartures:
+  events:
+    - http:
+        path: /{id}/departures
+        method: GET
+        cors: true
