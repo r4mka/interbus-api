@@ -18,3 +18,17 @@ getLists:
         path: /{id}
         method: GET
         cors: true
+
+addToList:
+  events:
+    - http:
+        path: /{id}/add
+        method: POST
+        cors: true
+
+removeFromList:
+  events:
+    - http:
+        path: /{id}/remove
+        method: POST
+        cors: true
