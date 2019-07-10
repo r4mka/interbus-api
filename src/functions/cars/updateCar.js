@@ -17,7 +17,7 @@ export default wrapper(({ pathParameters: { id }, body = {} }) =>
           pick(body, 'status', 'carModel', 'milage', 'plate', 'year'),
         ),
         body.driverId
-          ? assignDriverToCar({ driverId: body.driverId, carId: id }).catch(() => {})
+          ? assignDriverToCar({ driverId: body.driverId, carId: id }).catch(console.error)
           : Promise.resolve(),
       ]).then(([car, { driver } = {}]) => (driver ? { ...car, driver } : car)),
     ),

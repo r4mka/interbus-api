@@ -1,9 +1,4 @@
 import dynamoose from 'dynamoose';
-import config from 'config';
-
-const {
-  app: { status },
-} = config;
 
 const StorageSchema = new dynamoose.Schema(
   {
@@ -31,7 +26,8 @@ const StorageSchema = new dynamoose.Schema(
     },
     // GSI sort keys
     date: { type: Date },
-    status: { type: String, enum: status },
+    // todo: add status validation in lambda functions
+    status: { type: String },
 
     // common
     firstname: { type: String },
