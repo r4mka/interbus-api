@@ -15,7 +15,7 @@ deleteList:
 getLists:
   events:
     - http:
-        path: /{id}
+        path: /
         method: GET
         cors: true
 

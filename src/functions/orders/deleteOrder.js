@@ -14,5 +14,7 @@ export default wrapper(({ pathParameters: { id: orderId } }) =>
   Promise.all([
     Storage.batchDelete([order, ...clientOrders]),
     decrementDepartureOrders(order.date),
+    // todo: remove order from list
+    // todo: if order is from the past, reject
   ]),
 );
