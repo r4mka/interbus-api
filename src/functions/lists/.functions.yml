@@ -12,13 +12,6 @@ deleteList:
         method: DELETE
         cors: true
 
-getLists:
-  events:
-    - http:
-        path: /
-        method: GET
-        cors: true
-
 addToList:
   events:
     - http:
