@@ -1,5 +1,5 @@
 import config from 'config';
-import { find } from 'lodash';
+import { includes } from 'lodash';
 import { errors } from 'utils';
 
 const {
@@ -9,7 +9,8 @@ const allowedTypes = [CAR, DRIVER, ORDER];
 
 export const getType = id => {
   const [type] = id.split('-');
-  if (!find(allowedTypes, type)) {
+
+  if (!includes(allowedTypes, type)) {
     throw errors.BadRequest(`${type} type is not supported. Please use one of ${allowedTypes}`);
   }
 
