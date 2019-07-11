@@ -33,6 +33,8 @@ export default wrapper(({ pathParameters: { id: orderId }, body = {} }) =>
         // update order assigned to client
         Storage.update({ pk: clientId, sk: orderId }, pick(body, ['date', 'from', 'to'])),
         // if date has been changed, update corresponding departures
+        // todo: if date, from or to is being updated then remove order from list
+        // todo: user should not be able to edit past offers
         has(body, 'date')
           ? Promise.all([decrementDepartureOrders(oldDate), incrementDepartureOrders(body.date)])
           : Promise.resolve(),

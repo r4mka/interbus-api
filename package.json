@@ -7,7 +7,9 @@
     "start": "bnr offline",
     "dynamodb": "bnr dynamodb",
     "dynamodb:admin": "bnr dynamodb-admin",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint -c .eslintrc src",
+    "lint:fix": "eslint -c .eslintrc src --fix"
   },
   "betterScripts": {
     "offline": {
