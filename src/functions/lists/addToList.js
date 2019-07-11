@@ -1,6 +1,6 @@
 import config from 'config';
 import { pick } from 'lodash';
-import { getType } from 'functions/.common';
+import { getType } from 'common';
 import { wrapper, Storage, verify, errors } from 'utils';
 
 const {

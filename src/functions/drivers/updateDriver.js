@@ -1,6 +1,6 @@
 import config from 'config';
 import { Storage, wrapper, verify } from 'utils';
-import { assignDriverToCar } from 'functions/.common';
+import { assignDriverToCar } from 'common';
 import { pick } from 'lodash';
 
 const {

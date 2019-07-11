@@ -7,11 +7,14 @@ export const rangeQuery = (query, { date, from, to } = {}) => {
 
   if (date) {
     return query.where('date').eq(+date);
-  } else if (from && to) {
+  }
+  if (from && to) {
     return query.where('date').between(+from, +to);
-  } else if (from) {
+  }
+  if (from) {
     return query.where('date').ge(+from);
-  } else if (to) {
+  }
+  if (to) {
     return query.where('date').le(+to);
   }
 

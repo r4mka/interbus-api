@@ -1,7 +1,7 @@
 import config from 'config';
 import { pick } from 'lodash';
 import { wrapper, Storage, id } from 'utils';
-import { assignDriverToCar } from 'functions/.common';
+import { assignDriverToCar } from 'common';
 
 const {
   app: {

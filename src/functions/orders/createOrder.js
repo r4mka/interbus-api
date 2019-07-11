@@ -1,7 +1,7 @@
 import config from 'config';
 import { pick } from 'lodash';
 import { wrapper, Storage, id, verify } from 'utils';
-import { incrementDepartureOrders } from 'functions/.common';
+import { incrementDepartureOrders } from 'common';
 
 const {
   sortKeyValues: { CLIENT, ORDER },

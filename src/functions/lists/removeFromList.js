@@ -1,5 +1,5 @@
 import config from 'config';
-import { getType } from 'functions/.common';
+import { getType } from 'common';
 import { wrapper, Storage, verify, errors } from 'utils';
 
 const {

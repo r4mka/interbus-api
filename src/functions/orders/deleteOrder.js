@@ -1,5 +1,5 @@
 import { wrapper, Storage } from 'utils';
-import { decrementDepartureOrders } from 'functions/.common';
+import { decrementDepartureOrders } from 'common';
 
 export default wrapper(({ pathParameters: { id: orderId } }) =>
   Promise.all([

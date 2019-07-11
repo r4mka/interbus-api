@@ -1,6 +1,6 @@
 import config from 'config';
 import { wrapper, Storage } from 'utils';
-import { rangeQuery } from 'functions/.common';
+import { rangeQuery } from 'common';
 
 const {
   sortKeyValues: { LIST },

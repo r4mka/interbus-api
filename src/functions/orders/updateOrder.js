@@ -1,7 +1,7 @@
 import config from 'config';
 import { has, pick } from 'lodash';
 import { Storage, wrapper, verify } from 'utils';
-import { incrementDepartureOrders, decrementDepartureOrders } from 'functions/.common';
+import { incrementDepartureOrders, decrementDepartureOrders } from 'common';
 
 const {
   sortKeyValues: { ORDER },
