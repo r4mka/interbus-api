@@ -3,7 +3,7 @@ import { wrapper, Storage, verify } from 'utils';
 import { decrementDepartureOrders } from 'common';
 
 const {
-  sortKeyValues: { ORDER },
+  sortKeyValues: { ORDER, LIST },
 } = config;
 
 export default wrapper(({ pathParameters: { id: orderId } }) =>
@@ -17,13 +17,15 @@ export default wrapper(({ pathParameters: { id: orderId } }) =>
         Storage.query('sk')
           .using('DateGlobalIndex')
           .eq(orderId),
+        Storage.query('sk')
+          .using('DateGlobalIndex')
+          .eq(`${LIST}-${orderId}`),
       ]),
     )
-    .then(([order, clientOrders]) =>
+    .then(([order, clientOrders, listOrder]) =>
       Promise.all([
-        Storage.batchDelete([order, ...clientOrders]),
+        Storage.batchDelete([order, ...clientOrders, ...listOrder]),
         decrementDepartureOrders(order.date),
-        // todo: remove order from list
         // todo: if order is from the past, reject
       ]),
     ),

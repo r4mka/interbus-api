@@ -7,7 +7,6 @@ const {
   sortKeyValues: { DRIVER },
 } = config;
 
-// todo: figure out generic mechanism for validation
 export default wrapper(({ pathParameters: { id }, body = {} }) =>
   Storage.get({ pk: id, sk: DRIVER })
     .then(driver => verify.presence(driver, 'Driver not found'))
