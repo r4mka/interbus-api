@@ -12,5 +12,5 @@ export default wrapper(({ queryStringParameters }) =>
       .using('DateGlobalIndex')
       .eq(DEPARTURE),
     queryStringParameters,
-  ).exec(),
+  ),
 );
