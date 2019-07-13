@@ -1,22 +1,26 @@
 import config from 'config';
 import { flatten } from 'lodash';
-import { wrapper, Storage } from 'utils';
+import { wrapper, Storage, verify } from 'utils';
 
 const {
-  sortKeyValues: { ASSIGNED_DRIVER },
+  sortKeyValues: { DRIVER, ASSIGNED_DRIVER },
 } = config;
 
-// todo: add 404 NotFound error to all delete handlers
 export default wrapper(({ pathParameters: { id } }) =>
-  Promise.all([
-    Storage.query('pk')
-      .eq(id)
-      .exec(),
-    Storage.query('sk')
-      .using('StatusGlobalIndex')
-      .eq(ASSIGNED_DRIVER)
-      .where('status')
-      .eq(id)
-      .exec(),
-  ]).then(results => Storage.batchDelete(flatten(results))),
+  Storage.get({ pk: id, sk: DRIVER })
+    .then(driver => verify.presence(driver, 'Driver not found'))
+    .then(() =>
+      Promise.all([
+        Storage.query('pk')
+          .eq(id)
+          .exec(),
+        Storage.query('sk')
+          .using('StatusGlobalIndex')
+          .eq(ASSIGNED_DRIVER)
+          .where('status')
+          .eq(id)
+          .exec(),
+      ]),
+    )
+    .then(results => Storage.batchDelete(flatten(results))),
 );
