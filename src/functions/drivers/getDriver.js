@@ -12,6 +12,12 @@ export default wrapper(({ pathParameters: { id } }) =>
   ]).then(([driver, assignedCar]) => {
     verify.presence(driver, 'Driver not found');
 
-    return assignedCar ? { ...driver, car: assignedCar } : driver;
+    if (assignedCar) {
+      const { status, plate, carModel } = assignedCar;
+
+      return { ...driver, car: { pk: status, driver: id, plate, carModel } };
+    }
+
+    return driver;
   }),
 );

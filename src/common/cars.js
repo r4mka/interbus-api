@@ -5,6 +5,7 @@ const {
   sortKeyValues: { CAR, DRIVER, ASSIGNED_CAR, ASSIGNED_DRIVER },
 } = config;
 
+// this relationship probably require redesign
 export const assignDriverToCar = ({ driverId, carId }) =>
   Promise.all([
     Storage.get({ pk: driverId, sk: DRIVER }).then(driver =>
