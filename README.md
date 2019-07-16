@@ -25,9 +25,9 @@ values.
 | Variable                 | Default value | Description                                                                                                                   |
 | ------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | NODE_PATH                | src           | Ppoints `src/` dir as an internal modules location.                                                 |
-| AWS_PROFILE              | mymoria       | Name of the AWS profile.                                                                                                      |
-| AWS_ACCOUNT_ID           | 123456789012  | Mymoria AWS Account ID (find in your account).                                                                                |
-| AWS_REGION               | eu-west-1     | AWS Region used by Mymoria - do not change.                                                                                   |
+| AWS_PROFILE              | aws_profile   | Name of the AWS profile.                                                                                                      |
+| AWS_ACCOUNT_ID           | 123456789012  | AWS Account ID (find in your account).                                                                                |
+| AWS_REGION               | eu-west-1     | AWS Region.                                                                                   |
 | ENVIRONMENT              | development   | Use `development` locally; other options used for deployment are `staging` and `production`.                                  |
 | OFFLINE_PORT             | 3002          | Local API Gateway port.                                                                                                       |
 | USE_REMOTE_DB            |               | If set to `true`, remote AWS DynamoDB is used instead of local.                                                               |
