@@ -7,12 +7,7 @@ const {
 } = config;
 
 export const findDepartureByDate = date =>
-  Storage.queryOne('sk')
-    .using('DateGlobalIndex')
-    .eq(DEPARTURE)
-    .where('date')
-    .eq(date)
-    .exec();
+  Storage.queryOne('sk').using('DateGlobalIndex').eq(DEPARTURE).where('date').eq(date).exec();
 
 export const incrementDepartureOrders = date =>
   findDepartureByDate(date).then(departure =>

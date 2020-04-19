@@ -11,9 +11,7 @@ export default wrapper(({ pathParameters: { id } }) =>
     .then(driver => verify.presence(driver, 'Driver not found'))
     .then(() =>
       Promise.all([
-        Storage.query('pk')
-          .eq(id)
-          .exec(),
+        Storage.query('pk').eq(id).exec(),
         Storage.query('sk')
           .using('StatusGlobalIndex')
           .eq(ASSIGNED_DRIVER)

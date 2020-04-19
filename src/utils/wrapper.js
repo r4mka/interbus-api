@@ -1,12 +1,11 @@
-import middy from 'middy';
 import dynamoose from 'dynamoose';
-import {
-  cors,
-  httpEventNormalizer,
-  httpHeaderNormalizer,
-  jsonBodyParser,
-  urlEncodeBodyParser,
-} from 'middy/middlewares';
+import middy from '@middy/core';
+import cors from '@middy/http-cors';
+import httpEventNormalizer from '@middy/http-event-normalizer';
+import httpHeaderNormalizer from '@middy/http-header-normalizer';
+import jsonBodyParser from '@middy/http-json-body-parser';
+import urlEncodeBodyParser from '@middy/http-urlencode-body-parser';
+import validator from '@middy/validator';
 
 const { ENVIRONMENT, IS_OFFLINE, USE_REMOTE_DB, DYNAMO_ENDPOINT } = process.env;
 
@@ -30,13 +29,14 @@ const transformResponse = data => ({ statusCode: 200, body: JSON.stringify(data)
  * @param fn                lambda function
  * @returns {middy.IMiddy}
  */
-export default fn => {
+export default (fn, { inputSchema }) => {
   const handler = middy((...args) => Promise.resolve(fn(...args)).then(transformResponse))
     .use(cors())
     .use(httpEventNormalizer())
     .use(httpHeaderNormalizer())
     .use(jsonBodyParser())
-    .use(urlEncodeBodyParser());
+    .use(urlEncodeBodyParser())
+    .use(validator({ inputSchema }));
 
   // handle http errors thrown from lambda functions
   handler.onError((h, next) => {

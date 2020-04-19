@@ -8,10 +8,5 @@ const {
 export default wrapper(({ pathParameters: { id } }) =>
   Storage.get({ pk: id, sk: LIST })
     .then(list => verify.presence(list, 'List not found'))
-    .then(() =>
-      Storage.query('pk')
-        .eq(id)
-        .exec()
-        .then(Storage.batchDelete),
-    ),
+    .then(() => Storage.query('pk').eq(id).exec().then(Storage.batchDelete)),
 );

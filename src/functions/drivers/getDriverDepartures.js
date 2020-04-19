@@ -8,9 +8,7 @@ const {
 
 export default wrapper(({ pathParameters: { id: driverId }, queryStringParameters }) =>
   rangeQuery(
-    Storage.query('sk')
-      .using('DateGlobalIndex')
-      .eq(`${LIST}-${driverId}`),
+    Storage.query('sk').using('DateGlobalIndex').eq(`${LIST}-${driverId}`),
     queryStringParameters,
   ),
 );

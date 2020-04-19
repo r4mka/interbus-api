@@ -11,11 +11,7 @@ const base64Decode = value =>
 const transformResponse = data => ({ items: data, lastKey: base64Encode(data.lastKey) });
 
 export const paginateQuery = (query, { limit, lastKey } = {}) =>
-  query
-    .startAt(base64Decode(lastKey))
-    .limit(limit)
-    .exec()
-    .then(transformResponse);
+  query.startAt(base64Decode(lastKey)).limit(limit).exec().then(transformResponse);
 
 export const rangeQuery = (baseQuery, { date, from, to, ...queryStringParameters } = {}) => {
   let query = baseQuery;

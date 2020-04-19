@@ -21,21 +21,9 @@ export default wrapper(({ pathParameters: { id } }) =>
             lists.map(({ pk, ...list }) =>
               Promise.all([
                 { pk, ...list },
-                Storage.queryOne('pk')
-                  .eq(pk)
-                  .where('sk')
-                  .beginsWith(`${LIST}-${CAR}`)
-                  .exec(),
-                Storage.queryOne('pk')
-                  .eq(pk)
-                  .where('sk')
-                  .beginsWith(`${LIST}-${DRIVER}`)
-                  .exec(),
-                Storage.query('pk')
-                  .eq(pk)
-                  .where('sk')
-                  .beginsWith(`${LIST}-${ORDER}`)
-                  .exec(),
+                Storage.queryOne('pk').eq(pk).where('sk').beginsWith(`${LIST}-${CAR}`).exec(),
+                Storage.queryOne('pk').eq(pk).where('sk').beginsWith(`${LIST}-${DRIVER}`).exec(),
+                Storage.query('pk').eq(pk).where('sk').beginsWith(`${LIST}-${ORDER}`).exec(),
               ]),
             ),
           ),

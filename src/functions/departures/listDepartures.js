@@ -7,10 +7,5 @@ const {
 } = config;
 
 export default wrapper(({ queryStringParameters }) =>
-  rangeQuery(
-    Storage.query('sk')
-      .using('DateGlobalIndex')
-      .eq(DEPARTURE),
-    queryStringParameters,
-  ),
+  rangeQuery(Storage.query('sk').using('DateGlobalIndex').eq(DEPARTURE), queryStringParameters),
 );

@@ -7,10 +7,5 @@ const {
 } = config;
 
 export default wrapper(({ queryStringParameters }) =>
-  paginateQuery(
-    Storage.query('sk')
-      .using('StatusGlobalIndex')
-      .eq(DRIVER),
-    queryStringParameters,
-  ),
+  paginateQuery(Storage.query('sk').using('StatusGlobalIndex').eq(DRIVER), queryStringParameters),
 );

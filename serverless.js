@@ -17,11 +17,12 @@ module.exports = {
     apiName: service,
     stackName: service,
   },
-  plugins: ['serverless-webpack', 'serverless-offline', 'serverless-dynamodb-local'],
+  plugins: ['serverless-webpack', 'serverless-dynamodb-local', 'serverless-offline'],
   custom: {
     'serverless-offline': {
       host: '0.0.0.0',
-      port: OFFLINE_PORT,
+      httpPort: OFFLINE_PORT,
+      noPrependStageInUrl: true,
     },
     webpack: {
       includeModules: true,
@@ -31,6 +32,7 @@ module.exports = {
         port: 8000,
         dbPath: path.resolve(__dirname, '.dynamodb'),
       },
+      stages: ['development'],
     },
   },
   functions,

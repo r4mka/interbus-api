@@ -11,15 +11,9 @@ export default wrapper(({ pathParameters: { id: orderId } }) =>
     .then(order => verify.presence(order, 'Order not found'))
     .then(() =>
       Promise.all([
-        Storage.queryOne('pk')
-          .eq(orderId)
-          .exec(),
-        Storage.query('sk')
-          .using('DateGlobalIndex')
-          .eq(orderId),
-        Storage.query('sk')
-          .using('DateGlobalIndex')
-          .eq(`${LIST}-${orderId}`),
+        Storage.queryOne('pk').eq(orderId).exec(),
+        Storage.query('sk').using('DateGlobalIndex').eq(orderId),
+        Storage.query('sk').using('DateGlobalIndex').eq(`${LIST}-${orderId}`),
       ]),
     )
     .then(([order, clientOrders, listOrder]) =>
